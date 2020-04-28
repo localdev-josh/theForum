@@ -4,16 +4,21 @@ import 'package:theforum/pages/details_page.dart';
 import 'package:theforum/widgets/forum_details_widget.dart';
 import 'package:theforum/widgets/forum_name_widget.dart';
 
-class ForumCard extends StatelessWidget {
+class ForumCard extends StatefulWidget {
   final Forum forum;
 
   ForumCard({this.forum});
 
   @override
+  _ForumCardState createState() => _ForumCardState();
+}
+
+class _ForumCardState extends State<ForumCard> {
+  @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsPage(forum: forum,)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsPage(forum: widget.forum,)));
       },
       child: SizedBox(
         width: 280.0,
@@ -27,17 +32,17 @@ class ForumCard extends StatelessWidget {
             child: Stack(
               children: <Widget>[
                 Image.asset(
-                  forum.imagePath,
+                  widget.forum.imagePath,
                   fit: BoxFit.fitWidth,
                 ),
                 Positioned(
                   left: 0,
                   bottom: 0,
                   right: 0,
-                  child: ForumDetailsWidget(forum: forum),
+                  child: ForumDetailsWidget(forum: widget.forum),
                 ),
                 Positioned(
-                    left: 0, bottom: 80.0, child: ForumNameWidget(forum: forum)),
+                    left: 0, bottom: 80.0, child: ForumNameWidget(forum: widget.forum)),
               ],
             ),
           ),
